@@ -25,7 +25,7 @@ struct LoginView: View {
                 .frame(width: 600, height: 600)
                 .clipped()
 
-            Text("Login")
+            Text("LLogin")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom, 20)
