@@ -13,6 +13,7 @@ struct LoginView: View {
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var showAlert = false
+    @State private var primaryColor = Color.primary
     
     // MARK: - Body
     var body: some View {
@@ -21,9 +22,9 @@ struct LoginView: View {
             Spacer()
             Image("Logo")
                 .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 600, height: 600)
-                .clipped()
+                .scaledToFill()
+                .frame(width: 200, height: 200)
+                .padding(.vertical, 32)
 
             Text("Login")
                 .font(.title)
@@ -31,21 +32,52 @@ struct LoginView: View {
                 .padding(.bottom, 20)
             // MARK: - Login
             VStack(spacing: 20) {
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                HStack {
+                    TextField("Email", text: $email)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .padding(.leading, 10)
+                        .padding(.trailing, 10)
+                        .padding(.vertical, 10)
+                        .foregroundColor(primaryColor)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(Color.blue, lineWidth: 2)
+                        )
+                }
+                .frame(width: UIScreen.main.bounds.width - 32, height:48)
+                .padding(.bottom, 10)
                 
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                HStack {
+                    SecureField("Password", text: $password)
+                        .padding(.leading, 10)
+                        .padding(.trailing, 10)
+                        .padding(.vertical, 10)
+                        .foregroundColor(primaryColor)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(Color.blue, lineWidth: 2)
+                        )
+                }
+                .frame(width: UIScreen.main.bounds.width - 32, height:48)
+                .padding(.bottom, 10)
                 
-                Button(action: {
+                Button {
                     viewModel.signIn(email: email, password: password)
-                }) {
-                    Text("Login")
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("SIGN IN")
+                            .fontWeight(.semibold)
+                        Image(systemName: "arrow.right.circle")
+                            .padding(.leading, 5)
+                        Spacer()
+                    }
+                    .foregroundColor(.white)
+                    .frame(width: UIScreen.main.bounds.width - 32, height:48)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .padding(.top, 10)
                 }
             }
             .padding(.horizontal, 40)
