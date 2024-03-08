@@ -18,6 +18,7 @@
 		496D3E702AEADD9E00C50228 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496D3E6F2AEADD9E00C50228 /* LoginView.swift */; };
 		496D3E742AEAEE4200C50228 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496D3E732AEAEE4200C50228 /* RegistrationView.swift */; };
 		496D3E772AEAF5A100C50228 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496D3E762AEAF5A100C50228 /* ProfileView.swift */; };
+		49A1D5C62B9513E900A4B81E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D5C52B9513E900A4B81E /* User.swift */; };
 		49DB62EB2AED81FE00F8E6CD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 49DB62EA2AED81FE00F8E6CD /* FirebaseFirestore */; };
 		49DB62ED2AED820600F8E6CD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49DB62EC2AED820600F8E6CD /* FirebaseFirestoreSwift */; };
 		49DB62EF2AED821C00F8E6CD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 49DB62EE2AED821C00F8E6CD /* FirebaseStorage */; };
@@ -34,6 +35,7 @@
 		496D3E6F2AEADD9E00C50228 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		496D3E732AEAEE4200C50228 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		496D3E762AEAF5A100C50228 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		49A1D5C52B9513E900A4B81E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		49DB62F22AED848700F8E6CD /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 		4937A2FF2ADDBC8800673426 /* TrainingApp */ = {
 			isa = PBXGroup;
 			children = (
+				49A1D5C42B9513C700A4B81E /* Model */,
 				496D3E6C2AEADC6600C50228 /* App */,
 				49042C732AE3BBDF002CFF57 /* Core */,
 				4937A3022ADDBC8800673426 /* ContentView.swift */,
@@ -124,6 +127,14 @@
 				496D3E762AEAF5A100C50228 /* ProfileView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		49A1D5C42B9513C700A4B81E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49A1D5C52B9513E900A4B81E /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		49DB62E92AED81FE00F8E6CD /* Frameworks */ = {
@@ -238,6 +249,7 @@
 				496D3E772AEAF5A100C50228 /* ProfileView.swift in Sources */,
 				496D3E742AEAEE4200C50228 /* RegistrationView.swift in Sources */,
 				49DB62F32AED848700F8E6CD /* AuthViewModel.swift in Sources */,
+				49A1D5C62B9513E900A4B81E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

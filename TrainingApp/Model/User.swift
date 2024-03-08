@@ -2,17 +2,27 @@
 //  User.swift
 //  TrainingApp
 //
-//  Created by kysel95 on 03/03/2024.
+//  Created by kysel95 on 28/10/2023.
 //
 
-import SwiftUI
+import Foundation
 
-struct User: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
+struct User: Identifiable, Codable {
+    
+    
+    let id: String
+    let fullname: String
+    let email: String
+    
+    var initials: String {
+        
+        let formatter = PersonNameComponentsFormatter()
+        if let components = formatter.personNameComponents(from: fullname) {
+            formatter.style = .abbreviated
+            return formatter.string(from: components)
+        }
+        
+        return ""
     }
-}
-
-#Preview {
-    User()
 }
