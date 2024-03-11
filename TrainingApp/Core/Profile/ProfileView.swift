@@ -17,7 +17,6 @@ struct ProfileView: View {
             Text("Welcome, \(user.fullname)!")
                     .font(.title)
                     .padding()
-                
             Text("Initials: \(user.initials)")
             Text("Email: \(user.email)")
             }

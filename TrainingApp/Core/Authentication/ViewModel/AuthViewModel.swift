@@ -114,30 +114,6 @@ class AuthViewModel: ObservableObject {
         print("DEBUG: Current user is \(String(describing: self.currentUser))")
         
     }
-// function to upload Avatar for User
-    func uploadAvatar(image: UIImage) async {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let imageData = image.jpegData(compressionQuality: 0.3) else { return }
-        let storageRef = Storage.storage().reference().child("profile_images/\(uid)")
-        do {
-            try await storageRef.putData(imageData)
-            print("DEBUG: Successfully uploaded avatar...")
-        } catch {
-            print("DEBUG: Error uploading avatar \(error.localizedDescription)")
-        }
-    }
-    // function to fetch Avatar for User
-    func fetchAvatar() async {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let storageRef = Storage.storage().reference().child("profile_images/\(uid)")
-        do {
-            let url = try await storageRef.downloadURL()
-            print("DEBUG: Avatar URL is \(url)")
-        } catch {
-            print("DEBUG: Error fetching avatar \(error.localizedDescription)")
-        }
-    }
-//
     
     func deleteUser() async throws {
         do {
