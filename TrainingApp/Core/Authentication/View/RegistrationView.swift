@@ -22,12 +22,12 @@ struct RegistrationView: View {
     // MARK: - Body
     var body: some View {
             VStack {
-                Spacer()
-                Image("Logo")
+                Image("Logo2")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 200, height: 200)
-                    .padding(.vertical, 32)
+                    .padding(.bottom, 20)
+                    .padding()
                 
                 Text("Registration")
                     .font(.title)
@@ -143,6 +143,7 @@ struct RegistrationView: View {
                             .fontWeight(.bold)
                     }
                     .font(.system(size:14))
+                    .padding(.bottom, 10)
                 }
             }
             .padding(.horizontal)

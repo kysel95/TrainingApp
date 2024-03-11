@@ -10,15 +10,16 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
+    
     var body: some View {
         VStack {
             if let user = viewModel.currentUser {
-                Text("Welcome, \(user.fullname)!")
+            Text("Welcome, \(user.fullname)!")
                     .font(.title)
                     .padding()
                 
-                Text("Initials: \(user.initials)")
-                Text("Email: \(user.email)")
+            Text("Initials: \(user.initials)")
+            Text("Email: \(user.email)")
             }
             
             Button {

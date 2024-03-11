@@ -3,6 +3,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import FirebaseStorage
 
 @MainActor
 class AuthViewModel: ObservableObject {
@@ -21,7 +22,40 @@ class AuthViewModel: ObservableObject {
             
         }
     }
+    // MARK: - Helper Functions
     
+    private func handleAuthError(error: NSError) -> String {
+        switch error.code {
+        case AuthErrorCode.wrongPassword.rawValue:
+            return "Invalid email or password."
+        case AuthErrorCode.invalidEmail.rawValue:
+            return "Invalid email address."
+        case AuthErrorCode.userDisabled.rawValue:
+            return "The user account has been disabled by an administrator."
+        case AuthErrorCode.emailAlreadyInUse.rawValue:
+            return "The email address is already in use by another account."
+        case AuthErrorCode.weakPassword.rawValue:
+            return "The password must be 6 characters long or more."
+        case AuthErrorCode.userNotFound.rawValue:
+            return "No account found with this email address."
+        case AuthErrorCode.invalidRecipientEmail.rawValue:
+            return "The recipient email address is invalid."
+        case AuthErrorCode.missingEmail.rawValue:
+            return "The email address is missing."
+        case AuthErrorCode.invalidSender.rawValue:
+            return "The sender email address is invalid."
+        case AuthErrorCode.invalidMessagePayload.rawValue:
+            return "The message payload is invalid."
+        case AuthErrorCode.operationNotAllowed.rawValue:
+            return "This operation is not allowed."
+        case AuthErrorCode.requiresRecentLogin.rawValue:
+            return "This operation is sensitive and requires recent authentication. Log in again before retrying this request."
+        case AuthErrorCode.networkError.rawValue:
+            return "A network error occurred. Please check your internet connection and try again."
+        default:
+            return "An unknown error occurred. Please try again later."
+        }
+    }
     // MARK: - Functions
     
     func signIn(email: String, password: String) async throws {
@@ -71,29 +105,6 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    // MARK: - Helper Functions
-    
-    private func handleAuthError(error: NSError) -> String {
-        switch error.code {
-        case AuthErrorCode.wrongPassword.rawValue:
-            return "Invalid email or password."
-        case AuthErrorCode.invalidEmail.rawValue:
-            return "Invalid email address."
-        case AuthErrorCode.userDisabled.rawValue:
-            return "The user account has been disabled by an administrator."
-        case AuthErrorCode.emailAlreadyInUse.rawValue:
-            return "The email address is already in use by another account."
-        case AuthErrorCode.weakPassword.rawValue:
-            return "The password must be 6 characters long or more."
-        case AuthErrorCode.userNotFound.rawValue:
-            return "No account found with this email address."
-        case AuthErrorCode.networkError.rawValue:
-            return "A network error occurred. Please check your internet connection and try again."
-        default:
-            return "An unknown error occurred. Please try again later."
-        }
-    }
-    
     func fetchUser() async {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -103,6 +114,31 @@ class AuthViewModel: ObservableObject {
         print("DEBUG: Current user is \(String(describing: self.currentUser))")
         
     }
+// function to upload Avatar for User
+    func uploadAvatar(image: UIImage) async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.3) else { return }
+        let storageRef = Storage.storage().reference().child("profile_images/\(uid)")
+        do {
+            try await storageRef.putData(imageData)
+            print("DEBUG: Successfully uploaded avatar...")
+        } catch {
+            print("DEBUG: Error uploading avatar \(error.localizedDescription)")
+        }
+    }
+    // function to fetch Avatar for User
+    func fetchAvatar() async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let storageRef = Storage.storage().reference().child("profile_images/\(uid)")
+        do {
+            let url = try await storageRef.downloadURL()
+            print("DEBUG: Avatar URL is \(url)")
+        } catch {
+            print("DEBUG: Error fetching avatar \(error.localizedDescription)")
+        }
+    }
+//
+    
     func deleteUser() async throws {
         do {
             try await Auth.auth().currentUser?.delete()

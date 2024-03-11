@@ -10,7 +10,6 @@ import Foundation
 
 struct User: Identifiable, Codable {
     
-    
     let id: String
     let fullname: String
     let email: String
@@ -25,4 +24,10 @@ struct User: Identifiable, Codable {
         
         return ""
     }
+}
+
+extension User {
+    
+    static var exampleUser = User(id: NSUUID().uuidString, fullname: "Marcin Tester", email: "Marcin.Tester@gmail.com")
+    
 }

@@ -20,12 +20,12 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Spacer()
-                Image("Logo")
+                Image("Logo2")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 200, height: 200)
-                    .padding(.vertical, 32)
+                    .padding(.bottom, 20)
+                    .padding()
                 
                 Text("Login")
                     .font(.title)
@@ -128,6 +128,8 @@ struct LoginView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 40)
                 
+                Spacer()
+                
                 NavigationLink {
                     RegistrationView()
                         .navigationBarBackButtonHidden(true)
@@ -138,6 +140,7 @@ struct LoginView: View {
                             .fontWeight(.bold)
                     }
                     .font(.system(size:14))
+                    .padding(.bottom, 10)
                 }
             }
             .padding(.horizontal)
