@@ -6,13 +6,19 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 
-struct User: Identifiable, Codable {
+struct User: Identifiable, Codable, Hashable {
     
-    let id: String
+    @DocumentID var uid: String?
     let fullname: String
     let email: String
+    var profileImageUrl: String?
+    
+    var id: String {
+        return uid ?? NSUUID().uuidString
+    }
     
     var initials: String {
         
@@ -28,6 +34,6 @@ struct User: Identifiable, Codable {
 
 extension User {
     
-    static var exampleUser = User(id: NSUUID().uuidString, fullname: "Marcin Tester", email: "Marcin.Tester@gmail.com")
+    static var exampleUser = User(fullname: "Marcin Tester", email: "Marcin.Tester@gmail.com", profileImageUrl: "Tester")
     
 }

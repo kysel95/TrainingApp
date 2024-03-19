@@ -10,15 +10,17 @@ import PhotosUI
 
 struct EditProfileView: View {
     
+    @StateObject var viewModel2 = ProfileViewModel()
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var updateFullname = ""
     @State private var updatePassword = ""
+    @State private var primaryColor = Color.primary
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ZStack {
-                Color(.systemGroupedBackground)
+                Color(.systemGray6)
                     .edgesIgnoringSafeArea([.bottom, .horizontal])
                 
                 VStack{
@@ -32,10 +34,13 @@ struct EditProfileView: View {
                             } else {
                                 Text("Name")
                                       .fontWeight(.semibold)
+
                                 Text(User.exampleUser.fullname)
+
                             }
 
                         }
+                        .foregroundColor(.black)
 
                         
                         Spacer()
@@ -60,6 +65,7 @@ struct EditProfileView: View {
                     VStack(alignment: .leading){
                         Text("Change Name")
                             .fontWeight(.semibold)
+                        
                         
                         TextField("Enter Name...", text: $updateFullname)
                     }
@@ -106,6 +112,7 @@ struct EditProfileView: View {
                     .foregroundColor(.black)
                 }
             }
+            .preferredColorScheme(.light)
         }
     }
 }

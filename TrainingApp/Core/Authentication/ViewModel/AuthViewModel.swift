@@ -4,6 +4,9 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 import FirebaseStorage
+import PhotosUI
+import Combine
+import SwiftUI
 
 @MainActor
 class AuthViewModel: ObservableObject {
@@ -52,6 +55,8 @@ class AuthViewModel: ObservableObject {
             return "This operation is sensitive and requires recent authentication. Log in again before retrying this request."
         case AuthErrorCode.networkError.rawValue:
             return "A network error occurred. Please check your internet connection and try again."
+        case AuthErrorCode.keychainError.rawValue:
+            return "A keychain error occurred. Please try again."
         default:
             return "An unknown error occurred. Please try again later."
         }
@@ -83,9 +88,7 @@ class AuthViewModel: ObservableObject {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            let user = User(id: result.user.uid, fullname: fullname, email: email)
-            let encodedUser = try Firestore.Encoder().encode(user)
-            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
+            try await self.uploadUserData(email: email, fullname: fullname, id: result.user.uid)
             await fetchUser()
             print("User created successfully!")
         } catch {
@@ -126,6 +129,7 @@ class AuthViewModel: ObservableObject {
             print("User deletion error: \(error.localizedDescription)")
         }
     }
+    
     func resetPassword(email: String) async throws {
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
@@ -134,5 +138,11 @@ class AuthViewModel: ObservableObject {
             self.errorMessage = handleAuthError(error: error as NSError)
             print("Password reset error: \(error.localizedDescription)")
         }
+    }
+    
+    private func uploadUserData(email: String, fullname: String, id: String) async throws {
+        let user = User(fullname: fullname, email: email, profileImageUrl: nil)
+        guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
+        try await Firestore.firestore().collection("users").document(id).setData(encodedUser)
     }
 }

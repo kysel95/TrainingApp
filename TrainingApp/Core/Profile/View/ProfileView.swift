@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct ProfileView: View {
-    
+    @StateObject var viewModel2 = ProfileViewModel()
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var showEditProfile = false
     @State private var primaryColor = Color.primary
@@ -22,28 +22,45 @@ struct ProfileView: View {
                 // header
                 VStack {
                     if let user = viewModel.currentUser {
-                        Text(user.initials)
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .frame(width: 80, height: 80)
-                            .background(Color(.systemGray3))
-                            .clipShape(Circle())
-                        
+                        PhotosPicker(selection: $viewModel2.selectedItem) {
+                            if let profileImage = viewModel2.profileImage {
+                                profileImage
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                            } else {
+                                Text(user.initials)
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 80, height: 80)
+                                    .background(Color(.systemGray3))
+                                    .clipShape(Circle())
+                            }
+                        }
                         Text(user.fullname)
                             .font(.title)
                             .fontWeight(.semibold)
                             .foregroundColor(primaryColor)
                             .padding(.top, 8)
                     } else {
-                        PhotosPicker(selection: Binding<PhotosPickerItem?>) {
-                            Text(User.exampleUser.initials)
-                                .font(.title)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                                .frame(width: 80, height: 80)
-                                .background(Color(.systemGray3))
-                                .clipShape(Circle())
+                        PhotosPicker(selection: $viewModel2.selectedItem) {
+                            if let profileImage = viewModel2.profileImage {
+                                profileImage
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                            } else {
+                                Text(User.exampleUser.initials)
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 80, height: 80)
+                                    .background(Color(.systemGray3))
+                                    .clipShape(Circle())
+                            }
                         }
                         
                         Text(User.exampleUser.fullname)
