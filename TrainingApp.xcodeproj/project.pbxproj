@@ -67,9 +67,10 @@
 		49042C732AE3BBDF002CFF57 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				49B9F7822BA7154700A611AF /* Components */,
 				49042C752AE3BBE5002CFF57 /* Authentication */,
+				49B9F7822BA7154700A611AF /* Components */,
 				496D3E6D2AEADD1900C50228 /* Profile */,
+				49BC5E662BACA60300D791BD /* Root */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -77,6 +78,7 @@
 		49042C752AE3BBE5002CFF57 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				49BC5E672BACA66300D791BD /* Service */,
 				49DB62F02AED832500F8E6CD /* View */,
 				49DB62F12AED832E00F8E6CD /* ViewModel */,
 			);
@@ -87,8 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				4937A2FF2ADDBC8800673426 /* TrainingApp */,
-				4937A2FE2ADDBC8800673426 /* Products */,
-				49DB62E92AED81FE00F8E6CD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,18 +98,20 @@
 				4937A2FD2ADDBC8800673426 /* TrainingApp.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4937A2FF2ADDBC8800673426 /* TrainingApp */ = {
 			isa = PBXGroup;
 			children = (
-				49A1D5C42B9513C700A4B81E /* Model */,
 				496D3E6C2AEADC6600C50228 /* App */,
 				49042C732AE3BBDF002CFF57 /* Core */,
-				4937A3022ADDBC8800673426 /* ContentView.swift */,
+				49A1D5C42B9513C700A4B81E /* Model */,
+				4937A3062ADDBC8A00673426 /* Preview Content */,
+				4937A2FE2ADDBC8800673426 /* Products */,
+				49DB62E92AED81FE00F8E6CD /* Frameworks */,
 				49042C762AE3C1E1002CFF57 /* GoogleService-Info.plist */,
 				4937A3042ADDBC8A00673426 /* Assets.xcassets */,
-				4937A3062ADDBC8A00673426 /* Preview Content */,
 			);
 			path = TrainingApp;
 			sourceTree = "<group>";
@@ -173,11 +175,27 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		49BC5E662BACA60300D791BD /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				4937A3022ADDBC8800673426 /* ContentView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		49BC5E672BACA66300D791BD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		49DB62E92AED81FE00F8E6CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		49DB62F02AED832500F8E6CD /* View */ = {
