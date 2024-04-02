@@ -66,6 +66,9 @@ struct ProfileView: View {
                 .foregroundColor(.red)
             }
         }
+        .sheet(isPresented: $showEditProfile, content: {
+            EditProfileView(user: user)
+        })
         .navigationBarTitleDisplayMode(.inline)
     }
 }

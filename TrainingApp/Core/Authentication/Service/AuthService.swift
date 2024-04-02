@@ -4,27 +4,18 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 import FirebaseStorage
-import PhotosUI
 import Combine
 import SwiftUI
 
 @MainActor
-class AuthViewModel: ObservableObject {
+class AuthService {
+    
     // MARK: - Properties
     
+    static let shared = AuthService()
     @Published var errorMessage: String = ""
     @Published var userSession: FirebaseAuth.User?
-    @Published var currentUser: User?
     
-    init() {
-        self.userSession = Auth.auth().currentUser
-        
-        Task {
-            
-            await fetchUser()
-            
-        }
-    }
     // MARK: - Helper Functions
     
     private func handleAuthError(error: NSError) -> String {
@@ -63,11 +54,11 @@ class AuthViewModel: ObservableObject {
     }
     // MARK: - Functions
     
-    func signIn(email: String, password: String) async throws {
+    func signIn(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
-            await fetchUser()
+            try await UserService.shared.fetchCurrentUser()
             print("User signed in successfully!")
         } catch {
             self.errorMessage = handleAuthError(error: error as NSError)
@@ -75,7 +66,7 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func createUser(email: String, fullname: String, password: String, confirmPassword: String) async throws {
+    func createUser(withEmail email: String, username: String, password: String, confirmPassword: String) async throws {
         guard password == confirmPassword else {
             errorMessage = "Passwords do not match."
             return
@@ -84,12 +75,11 @@ class AuthViewModel: ObservableObject {
             errorMessage = "The password must be at least 6 characters long."
             return
         }
-        
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            try await self.uploadUserData(email: email, fullname: fullname, id: result.user.uid)
-            await fetchUser()
+            try await self.uploadUserData(withEmail: email, username: username, id: result.user.uid)
+            try await UserService.shared.fetchCurrentUser()
             print("User created successfully!")
         } catch {
             self.errorMessage = handleAuthError(error: error as NSError)
@@ -101,28 +91,18 @@ class AuthViewModel: ObservableObject {
         do {
             try Auth.auth().signOut()
             self.userSession = nil
-            self.currentUser = nil
+            UserService.shared.reset()
             print("User signed out successfully!")
         } catch {
             print("Sign out error: \(error.localizedDescription)")
         }
     }
     
-    func fetchUser() async {
-        
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        self.currentUser = try? snapshot.data(as: User.self)
-        
-        print("DEBUG: Current user is \(String(describing: self.currentUser))")
-        
-    }
-    
     func deleteUser() async throws {
         do {
             try await Auth.auth().currentUser?.delete()
             self.userSession = nil
-            self.currentUser = nil
+            UserService.shared.reset()
             print("User deleted successfully!")
         } catch {
             self.errorMessage = handleAuthError(error: error as NSError)
@@ -130,7 +110,7 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func resetPassword(email: String) async throws {
+    func resetPassword(withEmail email: String) async throws {
         do {
             try await Auth.auth().sendPasswordReset(withEmail: email)
             print("Password reset email sent successfully!")
@@ -140,9 +120,10 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    private func uploadUserData(email: String, fullname: String, id: String) async throws {
-        let user = User(fullname: fullname, email: email, profileImageUrl: nil)
-        guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
-        try await Firestore.firestore().collection("users").document(id).setData(encodedUser)
+    private func uploadUserData(withEmail email: String, username: String, id: String) async throws {
+        let user = User(username: username, email: email, profileImageUrl: nil)
+        guard let userData = try? Firestore.Encoder().encode(user) else { return }
+        try await Firestore.firestore().collection("users").document(id).setData(userData)
+        UserService.shared.currentUser = user
     }
 }

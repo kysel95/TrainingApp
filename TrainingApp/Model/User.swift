@@ -12,7 +12,8 @@ import FirebaseFirestoreSwift
 struct User: Identifiable, Codable, Hashable {
     
     @DocumentID var uid: String?
-    let fullname: String
+    var fullname: String?
+    let username: String
     let email: String
     var profileImageUrl: String?
     
@@ -21,19 +22,11 @@ struct User: Identifiable, Codable, Hashable {
     }
     
     var initials: String {
-        
         let formatter = PersonNameComponentsFormatter()
-        if let components = formatter.personNameComponents(from: fullname) {
+        if let components = formatter.personNameComponents(from: username) {
             formatter.style = .abbreviated
             return formatter.string(from: components)
         }
-        
         return ""
     }
-}
-
-extension User {
-    
-    static var exampleUser = User(fullname: "Marcin Tester", email: "Marcin.Tester@gmail.com", profileImageUrl: "Tester")
-    
 }

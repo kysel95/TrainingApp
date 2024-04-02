@@ -6,21 +6,24 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, 
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
+}
 
 @main
 struct TrainingApp: App {
-    // MARK: - Instance of AuthViewModel
-    @StateObject var viewModel = AuthViewModel()
-    // MARK: - Initialize Firebase
-    init() {
-        FirebaseApp.configure()
-    }
-    // MARK: - Pass viewModel to ContentView
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(viewModel)
         }
     }
 }

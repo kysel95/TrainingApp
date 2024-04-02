@@ -8,40 +8,30 @@ import SwiftUI
 
 struct LoginView: View {
     // MARK: - Properties
-    @State private var email = ""
-    @State private var password = ""
-    @EnvironmentObject var viewModel: AuthViewModel
+    @StateObject var viewModel = LoginViewModel()
     @State private var showAlert: Bool = false
     @State private var primaryColor = Color.primary
     @State private var isPasswordVisible = false
-    
-    
+
     // MARK: - Body
     var body: some View {
         NavigationStack {
             VStack {
+                Spacer()
                 Image("Logo2")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 200, height: 200)
                     .padding(.bottom, 20)
                     .padding()
-                
-                Text("Login")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding(.bottom, 20)
-                    .foregroundColor(primaryColor)
                 // MARK: - Login
                 VStack(spacing: 10) {
                     HStack {
-                        TextField("Email", text: $email)
+                        TextField("Email", text: $viewModel.email)
                             .font(.system(size: 20))
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
-                            .padding(.leading, 10)
-                            .padding(.trailing, 10)
-                            .padding(.vertical, 10)
+                            .padding(10)
                             .foregroundColor(primaryColor)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 4)
@@ -50,24 +40,18 @@ struct LoginView: View {
                     }
                     .frame(width: UIScreen.main.bounds.width - 32, height:48)
                     .padding(.bottom, 10)
-                    
                     HStack {
                         if isPasswordVisible {
-                            TextField("Password", text: $password)
+                            TextField("Password", text: $viewModel.password)
                                 .font(.system(size: 20))
-                                .padding(.leading, 10)
-                                .padding(.trailing, 10)
-                                .padding(.vertical, 10)
+                                .padding(10)
                                 .foregroundColor(primaryColor)
                         } else {
-                            SecureField("Password", text: $password)
+                            SecureField("Password", text: $viewModel.password)
                                 .font(.system(size: 20))
-                                .padding(.leading, 10)
-                                .padding(.trailing, 10)
-                                .padding(.vertical, 10)
+                                .padding(10)
                                 .foregroundColor(primaryColor)
                         }
-                        
                         Button {
                             isPasswordVisible.toggle()
                         } label: {
@@ -75,8 +59,7 @@ struct LoginView: View {
                                 .foregroundColor(.gray)
                                 .font(.system(size: 20))
                         }
-                        .padding(.trailing, 10)
-                        .padding(.vertical, 10)
+                        .padding(10)
                         .alignmentGuide(.trailing) { $0[.trailing] }
                     }
                     .overlay(
@@ -85,12 +68,11 @@ struct LoginView: View {
                     )
                     .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                     .padding(.bottom, 10)
-                    
                     HStack{
                         Button{
                             Task{
                                 do{
-                                    try await viewModel.resetPassword(email: email)
+                                    try await viewModel.resetPassword()
                                 }
                             }
                         } label : {
@@ -102,11 +84,10 @@ struct LoginView: View {
                     }
                     .cornerRadius(10)
                     .padding(.leading,200)
-                    
                     Button {
                         Task{
                             do{
-                                try await viewModel.signIn(email: email, password: password)
+                                try await viewModel.signIn()
                             }
                         }
                     } label: {
@@ -122,44 +103,43 @@ struct LoginView: View {
                         .frame(width: UIScreen.main.bounds.width - 32, height:48)
                         .background(Color.blue)
                         .cornerRadius(10)
-                        .padding(.top, 10)
+                        .padding(10)
                     }
                 }
-                .padding(.horizontal, 40)
-                .padding(.bottom, 40)
-                
+                .padding(10)
+    
                 Spacer()
+                
+                Divider()
                 
                 NavigationLink {
                     RegistrationView()
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    HStack(spacing: 2) {
+                    HStack(spacing: 3) {
                         Text("Dont have an account?")
                         Text("Sign up")
                             .fontWeight(.bold)
                     }
-                    .font(.system(size:14))
-                    .padding(.bottom, 10)
                 }
+                .padding(.vertical, 16)
+                .font(.footnote)
             }
             .padding(.horizontal)
             .alert("Error", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
-                Text(viewModel.errorMessage)
+                Text(AuthService.shared.errorMessage)
             }
-            .onReceive(viewModel.$errorMessage) { newValue in
+            .onReceive(AuthService.shared.$errorMessage) { newValue in
                 showAlert = !newValue.isEmpty
             }
         }
     }
 }
-
 // MARK: - Preview
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            .environmentObject(AuthViewModel())
     }
 }

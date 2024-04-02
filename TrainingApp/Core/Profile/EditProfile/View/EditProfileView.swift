@@ -10,11 +10,12 @@ import PhotosUI
 
 struct EditProfileView: View {
     let user: User
-    @StateObject var viewModel = CurrentUserProfileViewModel()
+    
     @State private var updateFullname = ""
     @State private var updatePassword = ""
     @State private var primaryColor = Color.primary
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = EditProfileViewModel()
     
     var body: some View {
         NavigationStack {
@@ -26,37 +27,26 @@ struct EditProfileView: View {
                     
                     HStack {
                         VStack(alignment: .leading) {
-                            if let user = viewModel.currentUser {
-                                Text("Name")
-                                    .fontWeight(.semibold)
-                                Text(user.fullname)
-                            } else {
-                                Text("Name")
-                                      .fontWeight(.semibold)
-
-                                Text(user.fullname)
-
-                            }
-
+                            Text("Name")
+                                .fontWeight(.semibold)
+                            Text(user.fullname ?? "")
+                            
                         }
                         .foregroundColor(.black)
-
                         
                         Spacer()
                         
-                       //PhotosPicker(selection: $viewModel.selectedItem) {
-                          //  if let image = $viewModel.profileImage {
-                             //   image
-                               //     .resizable()
-                              //      .scaledToFill()
-                                //    .frame(width: 55, height: 55)
-                                //    .clipShape(Circle())
-                           // } else {
-                                //ProfileImageView()
-                           // }
-                       // }
-
-                        
+                        PhotosPicker(selection: $viewModel.selectedItem) {
+                            if let image = viewModel.profileImage {
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 55, height: 55)
+                                    .clipShape(Circle())
+                            } else {
+                                ProfileImageView(user: user)
+                            }
+                        }
                     }
                     
                     Divider()
@@ -64,8 +54,6 @@ struct EditProfileView: View {
                     VStack(alignment: .leading){
                         Text("Change Name")
                             .fontWeight(.semibold)
-                        
-                        
                         TextField("Enter Name...", text: $updateFullname)
                     }
                     .autocapitalization(.words)
@@ -104,7 +92,10 @@ struct EditProfileView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
-                        
+                        Task {
+                            try await viewModel.updateUserData()
+                            dismiss()
+                        }
                     }
                     .font(.subheadline)
                     .fontWeight(.semibold)

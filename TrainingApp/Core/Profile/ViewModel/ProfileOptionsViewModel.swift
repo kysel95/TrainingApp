@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 enum ProfileOptionsViewModel: Int, CaseIterable, Identifiable {
     case darkMode
     case activeStatus

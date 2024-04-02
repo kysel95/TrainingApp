@@ -6,3 +6,84 @@
 //
 
 import Foundation
+import SwiftUI
+
+
+struct CurrentUserProfileView: View {
+    
+    @StateObject var viewModel = CurrentUserProfileViewModel()
+    @State private var showEditProfile = false
+    @State private var primaryColor = Color.primary
+    
+    private var currentUser: User? {
+        return viewModel.currentUser
+    }
+    
+    var body: some View {
+        NavigationStack {
+            VStack {
+                // header
+                ProfileHeaderView(user: currentUser)
+                
+                Button {
+                    showEditProfile.toggle()
+                } label: {
+                    Text("Edit Profile")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                        .frame(width: 353, height: 32)
+                        .background(.white)
+                        .cornerRadius(8)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color(.systemGray4), lineWidth: 1)
+                        }
+                }
+                // list
+                List {
+                    Section {
+                        ForEach(ProfileOptionsViewModel.allCases) { option in
+                            HStack {
+                                Image(systemName: option.imageName)
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .foregroundColor(option.imageBackgroundColor)
+                                Text(option.title)
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
+                    Section {
+                        Button {
+                            AuthService.shared.signOut()
+                        } label: {
+                            Text("Log Out")
+                        }
+                        Button {
+                            Task{
+                                do {
+                                    try await AuthService.shared.deleteUser()
+                                }
+                            }
+                        } label: {
+                            Text("Delete Account")
+                        }
+                    }
+                    .foregroundColor(.red)
+                }
+            }
+        }
+        .sheet(isPresented: $showEditProfile, content: {
+            if let user = currentUser{
+                EditProfileView(user: user)
+            }
+        })
+    }
+}
+
+struct CurrentUserProfileView_Previews : PreviewProvider {
+    static var previews: some View {
+        CurrentUserProfileView()
+    }
+}
