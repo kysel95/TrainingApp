@@ -9,9 +9,8 @@ import SwiftUI
 import PhotosUI
 
 struct EditProfileView: View {
-    
-    @StateObject var viewModel2 = ProfileViewModel()
-    @EnvironmentObject var viewModel: AuthViewModel
+    let user: User
+    @StateObject var viewModel = CurrentUserProfileViewModel()
     @State private var updateFullname = ""
     @State private var updatePassword = ""
     @State private var primaryColor = Color.primary
@@ -35,7 +34,7 @@ struct EditProfileView: View {
                                 Text("Name")
                                       .fontWeight(.semibold)
 
-                                Text(User.exampleUser.fullname)
+                                Text(user.fullname)
 
                             }
 
@@ -53,7 +52,7 @@ struct EditProfileView: View {
                                 //    .frame(width: 55, height: 55)
                                 //    .clipShape(Circle())
                            // } else {
-                                ProfileImageView()
+                                //ProfileImageView()
                            // }
                        // }
 
@@ -119,7 +118,6 @@ struct EditProfileView: View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView()
-            .environmentObject(AuthViewModel())
+        EditProfileView(user: dev.user)
     }
 }
