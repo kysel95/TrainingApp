@@ -23,14 +23,12 @@ struct EditProfileView: View {
                 Color(.systemGray6)
                     .edgesIgnoringSafeArea([.bottom, .horizontal])
                 
-                VStack{
-                    
+                VStack(spacing: 5){
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Name")
                                 .fontWeight(.semibold)
                             Text(user.fullname ?? "")
-                            
                         }
                         .foregroundColor(.black)
                         
@@ -41,10 +39,10 @@ struct EditProfileView: View {
                                 image
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 55, height: 55)
+                                    .frame(width: 48, height: 48)
                                     .clipShape(Circle())
                             } else {
-                                ProfileImageView(user: user)
+                                ProfileImageView(user: user, size: .medium)
                             }
                         }
                     }

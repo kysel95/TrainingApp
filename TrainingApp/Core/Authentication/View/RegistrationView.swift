@@ -29,62 +29,33 @@ struct RegistrationView: View {
                 VStack(spacing: 10) {
                     HStack {
                         TextField("Email", text: $viewModel.email)
-                            .font(.system(size: 20))
-                            .autocapitalization(.none)
-                            .disableAutocorrection(true)
-                            .padding(10)
-                            .foregroundColor(primaryColor)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .stroke(Color.blue, lineWidth: 2)
-                            )
                     }
-                    .frame(width: UIScreen.main.bounds.width - 32, height:48)
-                    .padding(.bottom, 10)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .modifier(TextFieldModifier())
+                    
                     HStack {
                         TextField("User Name", text: $viewModel.username)
-                            .font(.system(size: 20))
-                            .autocapitalization(.words)
-                            .padding(10)
-                            .foregroundColor(primaryColor)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .stroke(Color.blue, lineWidth: 2)
-                            )
+
                     }
-                    .frame(width: UIScreen.main.bounds.width - 32, height:48)
-                    .padding(.bottom, 10)
+                    .autocapitalization(.none)
+                    .modifier(TextFieldModifier())
+                    
                     HStack {
                         SecureField("Password", text: $viewModel.password)
-                            .font(.system(size: 20))
-                            .padding(10)
-                            .foregroundColor(primaryColor)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .stroke(Color.blue, lineWidth: 2)
-                            )
                     }
-                    .frame(width: UIScreen.main.bounds.width - 32, height:48)
-                    .padding(.bottom, 10)
+                    .modifier(TextFieldModifier())
+                    
                     HStack {
                         SecureField("Confirm Password", text: $viewModel.confirmPassword, onCommit: {
                             passwordsMatch = viewModel.confirmPassword == viewModel.password
                         })
-                        .font(.system(size: 20))
-                        .padding(10)
-                        .foregroundColor(primaryColor)
                         Image(systemName: passwordsMatch ? "checkmark.circle.fill" : "checkmark.circle")
-                            .font(.system(size: 20))
                             .foregroundColor(passwordsMatch ? .green : .gray)
-                            .padding(10)
                             .alignmentGuide(.trailing) { $0[.trailing] }
                     }
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color.blue, lineWidth: 2)
-                    )
-                    .frame(width: UIScreen.main.bounds.width - 32, height:48)
-                    .padding(.bottom, 10)
+                    .modifier(TextFieldModifier())
+                    
                     Button {
                         Task {
                             do{
@@ -94,18 +65,15 @@ struct RegistrationView: View {
                         }
                     } label: {
                         HStack {
-                            Spacer()
                             Text("SIGN UP")
                                 .fontWeight(.semibold)
                             Image(systemName: "arrow.right.circle")
                                 .padding(.leading, 5)
-                            Spacer()
                         }
                         .foregroundColor(.white)
-                        .frame(width: UIScreen.main.bounds.width - 32, height:48)
+                        .frame(width: 352, height: 44)
                         .background(Color.blue)
-                        .cornerRadius(10)
-                        .padding(10)
+                        .cornerRadius(8)
                     }
                 }
                 .padding(10)

@@ -28,46 +28,28 @@ struct LoginView: View {
                 VStack(spacing: 10) {
                     HStack {
                         TextField("Email", text: $viewModel.email)
-                            .font(.system(size: 20))
-                            .autocapitalization(.none)
-                            .disableAutocorrection(true)
-                            .padding(10)
-                            .foregroundColor(primaryColor)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .stroke(Color.blue, lineWidth: 2)
-                            )
                     }
-                    .frame(width: UIScreen.main.bounds.width - 32, height:48)
-                    .padding(.bottom, 10)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .modifier(TextFieldModifier())
+                    
                     HStack {
                         if isPasswordVisible {
                             TextField("Password", text: $viewModel.password)
-                                .font(.system(size: 20))
-                                .padding(10)
-                                .foregroundColor(primaryColor)
                         } else {
                             SecureField("Password", text: $viewModel.password)
-                                .font(.system(size: 20))
-                                .padding(10)
-                                .foregroundColor(primaryColor)
                         }
+                        
                         Button {
                             isPasswordVisible.toggle()
                         } label: {
                             Image(systemName: isPasswordVisible ? "eye.fill" : "eye.slash.fill")
                                 .foregroundColor(.gray)
-                                .font(.system(size: 20))
                         }
-                        .padding(10)
                         .alignmentGuide(.trailing) { $0[.trailing] }
                     }
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color.blue, lineWidth: 2)
-                    )
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 48)
-                    .padding(.bottom, 10)
+                    .modifier(TextFieldModifier())
+                    
                     HStack{
                         Button{
                             Task{
@@ -77,13 +59,15 @@ struct LoginView: View {
                             }
                         } label : {
                             Text("Forgot Password?")
+                                .font(.footnote)
                                 .fontWeight(.semibold)
+                                .padding(.vertical,5)
                                 .foregroundColor(.blue)
-                                .frame(width: UIScreen.main.bounds.width - 200, height:20)
+
                         }
                     }
-                    .cornerRadius(10)
-                    .padding(.leading,200)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    
                     Button {
                         Task{
                             do{
@@ -92,18 +76,15 @@ struct LoginView: View {
                         }
                     } label: {
                         HStack {
-                            Spacer()
                             Text("SIGN IN")
                                 .fontWeight(.semibold)
                             Image(systemName: "arrow.right.circle")
                                 .padding(.leading, 5)
-                            Spacer()
                         }
                         .foregroundColor(.white)
-                        .frame(width: UIScreen.main.bounds.width - 32, height:48)
+                        .frame(width: 352, height: 44)
                         .background(Color.blue)
-                        .cornerRadius(10)
-                        .padding(10)
+                        .cornerRadius(8)
                     }
                 }
                 .padding(10)

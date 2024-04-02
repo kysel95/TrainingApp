@@ -8,13 +8,30 @@
 import SwiftUI
 import Kingfisher
 
+enum ProfileImageViewSize {
+    case xxSmall
+    case xSmall
+    case small
+    case medium
+    case large
+    case xLarge
+    
+    var dimension: CGFloat {
+        switch self {
+        case .xxSmall: return 28
+        case .xSmall: return 32
+        case .small: return 40
+        case .medium: return 48
+        case .large: return 64
+        case .xLarge: return 80
+        }
+    }
+}
+
 struct ProfileImageView: View {
     
     var user: User?
-    
-    init(user: User?) {
-        self.user = user
-    }
+    let size: ProfileImageViewSize
     
     @State private var primaryColor = Color.primary
     
@@ -23,14 +40,14 @@ struct ProfileImageView: View {
             KFImage(URL(string: imageUrl))
                 .resizable()
                 .scaledToFill()
-                .frame(width: 55, height: 55)
+                .frame(width: size.dimension, height: size.dimension)
                 .clipShape(Circle())
         } else {
             Text(user?.initials ?? "")
                 .font(.title)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
-                .frame(width: 55, height: 55)
+                .frame(width: size.dimension, height: size.dimension)
                 .background(Color(.systemGray3))
                 .clipShape(Circle())
         }
@@ -39,6 +56,6 @@ struct ProfileImageView: View {
     
 struct ProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileImageView(user: dev.user)
+        ProfileImageView(user: dev.user, size: .medium)
     }
 }

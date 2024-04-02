@@ -11,6 +11,7 @@
 		49042C7A2AE3C52E002CFF57 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 49042C792AE3C52E002CFF57 /* FirebaseAnalytics */; };
 		49042C7E2AE3C52E002CFF57 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49042C7D2AE3C52E002CFF57 /* FirebaseAnalyticsSwift */; };
 		49042C862AE3C52E002CFF57 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 49042C852AE3C52E002CFF57 /* FirebaseAuth */; };
+		491229352BBC52D300D2FAE3 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491229342BBC52D300D2FAE3 /* TextFieldModifier.swift */; };
 		4937A3012ADDBC8800673426 /* TrainingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4937A3002ADDBC8800673426 /* TrainingApp.swift */; };
 		4937A3032ADDBC8800673426 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4937A3022ADDBC8800673426 /* ContentView.swift */; };
 		4937A3052ADDBC8A00673426 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4937A3042ADDBC8A00673426 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		49042C762AE3C1E1002CFF57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		491229342BBC52D300D2FAE3 /* TextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifier.swift; sourceTree = "<group>"; };
 		4937A2FD2ADDBC8800673426 /* TrainingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4937A3002ADDBC8800673426 /* TrainingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingApp.swift; sourceTree = "<group>"; };
 		4937A3022ADDBC8800673426 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,22 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		491229322BBC528B00D2FAE3 /* Utilis */ = {
+			isa = PBXGroup;
+			children = (
+				491229332BBC529E00D2FAE3 /* ViewModifiers */,
+			);
+			path = Utilis;
+			sourceTree = "<group>";
+		};
+		491229332BBC529E00D2FAE3 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				491229342BBC52D300D2FAE3 /* TextFieldModifier.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
 		4937A2F42ADDBC8700673426 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +149,7 @@
 				497A036E2BAEDA7A00FECF5A /* Extensions */,
 				49A1D5C42B9513C700A4B81E /* Model */,
 				497A036A2BAEC98A00FECF5A /* Services */,
+				491229322BBC528B00D2FAE3 /* Utilis */,
 				4937A3062ADDBC8A00673426 /* Preview Content */,
 				4937A2FE2ADDBC8800673426 /* Products */,
 				49DB62E92AED81FE00F8E6CD /* Frameworks */,
@@ -439,6 +458,7 @@
 				497A036C2BAEC9B400FECF5A /* UserService.swift in Sources */,
 				496D3E742AEAEE4200C50228 /* RegistrationView.swift in Sources */,
 				49DB62F32AED848700F8E6CD /* AuthService.swift in Sources */,
+				491229352BBC52D300D2FAE3 /* TextFieldModifier.swift in Sources */,
 				49A1D5C62B9513E900A4B81E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

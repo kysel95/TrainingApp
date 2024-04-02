@@ -12,28 +12,13 @@ struct ProfileHeaderView: View {
     
     var user: User?
     
-    init(user: User?) {
-        self.user = user
-    }
     @State private var primaryColor = Color.primary
     
     var body: some View {
         VStack {
-            if let imageUrl = user?.profileImageUrl {
-                KFImage(URL(string: imageUrl))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 80, height: 80)
-                    .clipShape(Circle())
-            } else {
-                Text(user?.initials ?? "")
-                    .font(.title)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .frame(width: 80, height: 80)
-                    .background(Color(.systemGray3))
-                    .clipShape(Circle())
-            }
+            
+            ProfileImageView(user: user, size: .xLarge)
+            
             Text(user?.fullname ?? "")
                 .font(.title)
                 .fontWeight(.semibold)
