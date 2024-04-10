@@ -69,6 +69,7 @@ struct CurrentUserProfileView: View {
                         } label: {
                             Text("Delete Account")
                         }
+                        
                     }
                     .foregroundColor(.red)
                 }

@@ -19,11 +19,6 @@ struct ProfileHeaderView: View {
             
             ProfileImageView(user: user, size: .xLarge)
             
-            Text(user?.fullname ?? "")
-                .font(.title)
-                .fontWeight(.semibold)
-                .foregroundColor(primaryColor)
-                .padding(.top, 8)
             Text(user?.username ?? "")
                 .font(.title)
                 .fontWeight(.semibold)

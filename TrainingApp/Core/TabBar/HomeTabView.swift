@@ -5,57 +5,51 @@
 //  Created by kysel95 on 26/03/2024.
 //
 
+import Foundation
 import SwiftUI
 
 struct HomeTabView: View {
-    
-    @State private var selectedTab = 0
-    
+    //let user: User
+    //let size: Tab
+    @Binding var selectedTab: Tab
+    private var fillImage: String {
+        selectedTab.rawValue + ".fill"
+    }
     var body: some View {
-        TabView(selection: $selectedTab) {
-            Text("Home View")
-                .tabItem {
-                    Image(systemName: selectedTab == 0 ? "house.fill" : "house")
-                        .environment(\.symbolVariants, selectedTab == 0 ? .fill : .none)
+        VStack {
+            HStack {
+                ForEach(Tab.allCases, id: \.rawValue) { tab in
+                    Spacer()
+                    VStack {
+                        Image(systemName: selectedTab == tab ? fillImage :
+                                tab.imageName)
+                        .scaleEffect(tab == selectedTab ? 1.25 : 1.0)
+                        .foregroundColor(selectedTab == tab ? .blue : .gray)
+                        .font(.system(size: 22))
+                        .frame(width: 30, height: 30)
+                        .onTapGesture {
+                            withAnimation(.easeIn(duration: 0.1)) {
+                                selectedTab = tab
+                            }
+                        }
+                        Text(tab.title)
+                            .font(.caption)
+
+                    }
+                    Spacer()
                 }
-                .onAppear { selectedTab = 0 }
-                .tag(0)
-            
-            Text("Explore")
-                .tabItem {
-                    Image(systemName : "magnifyingglass")
-                }
-                .onAppear { selectedTab = 1 }
-                .tag(1)
-            
-            Text("Training")
-                .tabItem {
-                    Image(systemName: "plus")
-                }
-                .onAppear { selectedTab = 2 }
-                .tag(2)
-            
-            Text("Activity")
-                .tabItem {
-                    Image(systemName: selectedTab == 3 ? "heart.fill" : "heart")
-                        .environment(\.symbolVariants, selectedTab == 3 ? .fill : .none)
-                }
-                .onAppear { selectedTab = 3 }
-                .tag(3)
-            
-            CurrentUserProfileView()
-                .tabItem {
-                    Image(systemName: selectedTab == 4 ? "person.fill" : "person")
-                        .environment(\.symbolVariants, selectedTab == 4 ? .fill : .none)
-                }
-                .onAppear { selectedTab = 4 }
-                .tag(4)
+            }
+            .frame(width: nil, height: 60)
+            .background(.thinMaterial)
+            .cornerRadius(10)
+            .padding()
         }
     }
 }
 
 struct HomeTabView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeTabView()
+        //HomeTabView(user: dev.user,size: .house, selectedTab: .constant(.house))
+        HomeTabView(selectedTab: .constant(.house))
     }
 }

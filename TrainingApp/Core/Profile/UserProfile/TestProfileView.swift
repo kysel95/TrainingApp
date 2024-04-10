@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  TestProfileView.swift
 //  TrainingApp
 //
 //  Created by kysel95 on 26/10/2023.
@@ -8,73 +8,59 @@
 import SwiftUI
 import PhotosUI
 
-struct ProfileView: View {
+struct TestProfileView: View {
     let user: User
     @State private var showEditProfile = false
     @State private var primaryColor = Color.primary
     
     var body: some View {
         VStack {
-            // header
-            ProfileHeaderView(user: user)
-            
-            Button {
-                showEditProfile.toggle()
-            } label: {
-                Text("Edit Profile")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-                    .frame(width: 353, height: 32)
-                    .background(.white)
-                    .cornerRadius(8)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(.systemGray4), lineWidth: 1)
-                    }
-            }
-            // list
             List {
+                ProfileHeaderView(user: user)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 Section {
-                    ForEach(ProfileOptionsViewModel.allCases) { option in
-                        HStack {
-                            Image(systemName: option.imageName)
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(option.imageBackgroundColor)
-                            Text(option.title)
-                                .font(.subheadline)
-                        }
-                    }
+                    Text("TEST number 1")
                 }
                 Section {
-                    Button {
-                        AuthService.shared.signOut()
-                    } label: {
-                        Text("Log Out")
-                    }
-                    Button {
-                        Task{
-                            do {
-                                try await AuthService.shared.deleteUser()
-                            }
-                        }
-                    } label: {
-                        Text("Delete Account")
-                    }
+                    Text("TEST number 2")
                 }
-                .foregroundColor(.red)
+                Section {
+                    Text("TEST number 2")
+                }
+                Section {
+                    Text("TEST number 2")
+                }
+                Section {
+                    Text("TEST number 2")
+                }
+                Section {
+                    Text("TEST number 2")
+                }
+                Section {
+                    Text("TEST number 2")
+                }
+                Section {
+                    Text("TEST number 2")
+                }
+                Section {
+                    Text("TEST number 2")
+                }
+                Section {
+                    Text("TEST number 2")
+                }
+                Section {
+                    Text("TEST number 2")
+                }
             }
+            .listRowBackground(Color.green)
         }
-        .sheet(isPresented: $showEditProfile, content: {
-            EditProfileView(user: user)
-        })
-        .navigationBarTitleDisplayMode(.inline)
+        .modifier(BackgroundModifier())
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct TestProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(user: dev.user)
+        TestProfileView(user: dev.user)
     }
 }
