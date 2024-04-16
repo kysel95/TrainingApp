@@ -8,30 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selectedTab: Tab = .house
+
     @StateObject var viewModel = ContentViewModel()
-    
-    init() {
-        UITabBar.appearance().isHidden = true
-    }
+
     var body: some View {
+        // MARK: - Display LoginView as first page
         Group {
             if viewModel.userSession != nil {
-                TabView( selection: $selectedTab) {
-                    CurrentUserProfileView()
-                        .tag(1)
-                    Text("Tab Content 2")
-                        .tag(2)
-                    Text("Tab Content 3")
-                        .tag(3)
-                    Text("Tab Content 4")
-                        .tag(4)
-                    Text("Tab Content 5")
-                        .tag(5)
-                }
-                .overlay(alignment: .bottom ) {
-                    HomeTabView(selectedTab: $selectedTab)
-                }
+                HomeTabView()
             } else {
                 LoginView()
             }

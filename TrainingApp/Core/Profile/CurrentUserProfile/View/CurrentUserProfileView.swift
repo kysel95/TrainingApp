@@ -74,6 +74,7 @@ struct CurrentUserProfileView: View {
                     .foregroundColor(.red)
                 }
             }
+            .modifier(BackgroundModifier())
         }
         .sheet(isPresented: $showEditProfile, content: {
             if let user = currentUser{

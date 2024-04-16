@@ -150,16 +150,16 @@
 			isa = PBXGroup;
 			children = (
 				496D3E6C2AEADC6600C50228 /* App */,
+				4937A3042ADDBC8A00673426 /* Assets.xcassets */,
 				49042C732AE3BBDF002CFF57 /* Core */,
 				497A036E2BAEDA7A00FECF5A /* Extensions */,
-				49A1D5C42B9513C700A4B81E /* Model */,
-				497A036A2BAEC98A00FECF5A /* Services */,
-				491229322BBC528B00D2FAE3 /* Utilis */,
-				4937A3062ADDBC8A00673426 /* Preview Content */,
-				4937A2FE2ADDBC8800673426 /* Products */,
 				49DB62E92AED81FE00F8E6CD /* Frameworks */,
 				49042C762AE3C1E1002CFF57 /* GoogleService-Info.plist */,
-				4937A3042ADDBC8A00673426 /* Assets.xcassets */,
+				49A1D5C42B9513C700A4B81E /* Model */,
+				4937A3062ADDBC8A00673426 /* Preview Content */,
+				4937A2FE2ADDBC8800673426 /* Products */,
+				497A036A2BAEC98A00FECF5A /* Services */,
+				491229322BBC528B00D2FAE3 /* Utilis */,
 			);
 			path = TrainingApp;
 			sourceTree = "<group>";
