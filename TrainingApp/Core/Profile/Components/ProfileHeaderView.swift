@@ -12,15 +12,15 @@ struct ProfileHeaderView: View {
     
     var user: User?
     
-    @State private var primaryColor = Color.primary
+    @State private var primaryColor = Color.white
     
     var body: some View {
         VStack {
             
-            ProfileImageView(user: user, size: .xLarge)
+            ProfileImageView(user: user, size: .xxLarge)
             
             Text(user?.username ?? "")
-                .font(.title)
+                .font(.largeTitle)
                 .fontWeight(.semibold)
                 .foregroundColor(primaryColor)
                 .padding(.top, 8)

@@ -94,6 +94,7 @@ struct RegistrationView: View {
                     .font(.footnote)
                 }
             }
+            .modifier(BackgroundModifier())
             .padding(.horizontal)
             .alert("Error", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }

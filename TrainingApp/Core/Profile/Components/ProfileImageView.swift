@@ -15,6 +15,7 @@ enum ProfileImageViewSize {
     case medium
     case large
     case xLarge
+    case xxLarge
     
     var dimension: CGFloat {
         switch self {
@@ -24,6 +25,7 @@ enum ProfileImageViewSize {
         case .medium: return 48
         case .large: return 64
         case .xLarge: return 80
+        case .xxLarge: return 100
         }
     }
 }
@@ -44,18 +46,21 @@ struct ProfileImageView: View {
                 .clipShape(Circle())
         } else {
             Text(user?.initials ?? "")
-                .font(.title)
+                .font(.system(size: 50))
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
                 .frame(width: size.dimension, height: size.dimension)
-                .background(Color(.systemGray3))
+                .background(.profile)
                 .clipShape(Circle())
+            
         }
     }
+    
+    
 }
     
 struct ProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileImageView(user: dev.user, size: .medium)
+        ProfileImageView(user: dev.user, size: .xxLarge)
     }
 }
