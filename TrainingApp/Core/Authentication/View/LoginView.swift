@@ -62,7 +62,7 @@ struct LoginView: View {
                                 .font(.footnote)
                                 .fontWeight(.semibold)
                                 .padding(.vertical,5)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.white)
 
                         }
                     }
@@ -105,7 +105,9 @@ struct LoginView: View {
                 }
                 .padding(.vertical, 16)
                 .font(.footnote)
+                .foregroundColor(.white)
             }
+            .modifier(BackgroundModifier())
             .padding(.horizontal)
             .alert("Error", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }

@@ -28,6 +28,17 @@ enum ProfileImageViewSize {
         case .xxLarge: return 100
         }
     }
+    var font: CGFloat {
+        switch self {
+        case .xxSmall: return 10
+        case .xSmall: return 15
+        case .small: return 20
+        case .medium: return 25
+        case .large: return 30
+        case .xLarge: return 40
+        case .xxLarge: return 50
+        }
+    }
 }
 
 struct ProfileImageView: View {
@@ -46,11 +57,11 @@ struct ProfileImageView: View {
                 .clipShape(Circle())
         } else {
             Text(user?.initials ?? "")
-                .font(.system(size: 50))
+                .font(.system(size: size.font))
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
                 .frame(width: size.dimension, height: size.dimension)
-                .background(.profile)
+                .background(.profileCircle)
                 .clipShape(Circle())
             
         }

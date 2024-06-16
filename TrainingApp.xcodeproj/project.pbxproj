@@ -32,7 +32,7 @@
 		499863892BB8108E00A07F26 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499863882BB8108E00A07F26 /* ImageUploader.swift */; };
 		4998638C2BB81F4A00A07F26 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4998638B2BB81F4A00A07F26 /* Kingfisher */; };
 		49A1D5C62B9513E900A4B81E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A1D5C52B9513E900A4B81E /* User.swift */; };
-		49A2E6B12BA3647B00C466DB /* ProfileOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2E6B02BA3647B00C466DB /* ProfileOptionsViewModel.swift */; };
+		49A2E6B12BA3647B00C466DB /* ProfileEnumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A2E6B02BA3647B00C466DB /* ProfileEnumsViewModel.swift */; };
 		49B700A62BB7400C003E5919 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B700A52BB7400C003E5919 /* ProfileImageView.swift */; };
 		49B9F7812BA70EF300A611AF /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B9F7802BA70EF300A611AF /* EditProfileView.swift */; };
 		49BC5E692BACA76E00D791BD /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC5E682BACA76E00D791BD /* RegistrationViewModel.swift */; };
@@ -67,7 +67,7 @@
 		499863862BB80DA300A07F26 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		499863882BB8108E00A07F26 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		49A1D5C52B9513E900A4B81E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		49A2E6B02BA3647B00C466DB /* ProfileOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOptionsViewModel.swift; sourceTree = "<group>"; };
+		49A2E6B02BA3647B00C466DB /* ProfileEnumsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEnumsViewModel.swift; sourceTree = "<group>"; };
 		49B700A52BB7400C003E5919 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		49B9F7802BA70EF300A611AF /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		49BC5E682BACA76E00D791BD /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 		4992D7EC2BA8C0D700157634 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				49A2E6B02BA3647B00C466DB /* ProfileOptionsViewModel.swift */,
+				49A2E6B02BA3647B00C466DB /* ProfileEnumsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -466,7 +466,7 @@
 				4937A3032ADDBC8800673426 /* ContentView.swift in Sources */,
 				497A03702BAEDAA400FECF5A /* PreviewProvider.swift in Sources */,
 				497A03742BAEDCF100FECF5A /* CurrentUserProfileView.swift in Sources */,
-				49A2E6B12BA3647B00C466DB /* ProfileOptionsViewModel.swift in Sources */,
+				49A2E6B12BA3647B00C466DB /* ProfileEnumsViewModel.swift in Sources */,
 				49B700A62BB7400C003E5919 /* ProfileImageView.swift in Sources */,
 				49BC5E6F2BACB54400D791BD /* LoginViewModel.swift in Sources */,
 				4937A3012ADDBC8800673426 /* TrainingApp.swift in Sources */,
@@ -614,6 +614,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrainingApp/Preview Content\"";
@@ -623,8 +624,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -632,6 +635,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kysel95.TrainingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -643,6 +647,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrainingApp/Preview Content\"";
@@ -652,8 +657,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -661,6 +668,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kysel95.TrainingApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

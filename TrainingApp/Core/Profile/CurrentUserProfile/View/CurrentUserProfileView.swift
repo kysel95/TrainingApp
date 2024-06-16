@@ -43,13 +43,13 @@ struct CurrentUserProfileView: View {
                 // list
                 List {
                     Section {
-                        ForEach(ProfileOptionsViewModel.allCases) { option in
+                        ForEach(Settings.allCases) { setting in
                             HStack {
-                                Image(systemName: option.imageName)
+                                Image(systemName: setting.imageName)
                                     .resizable()
                                     .frame(width: 24, height: 24)
-                                    .foregroundColor(option.imageBackgroundColor)
-                                Text(option.title)
+                                    .foregroundColor(setting.imageBackgroundColor)
+                                Text(setting.title)
                                     .font(.subheadline)
                             }
                         }
