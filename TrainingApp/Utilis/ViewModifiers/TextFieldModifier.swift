@@ -19,9 +19,10 @@ struct TextFieldModifier : ViewModifier {
             .foregroundColor(primaryColor)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.blue, lineWidth: 2)
+                    .stroke(Color.black, lineWidth: 4)
             )
             .background(Color(.systemGray6))
+            .cornerRadius(10)
             .padding(.bottom, 10)
     }
 }

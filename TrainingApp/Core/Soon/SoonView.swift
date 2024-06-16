@@ -9,8 +9,23 @@ import SwiftUI
 import PhotosUI
 import NavigationTransitions
 
+enum SoonViewTitle {
+    case inviteFriends
+    case statistics
+    case shareProgress
+
+    
+    var Title: String {
+        switch self {
+        case .inviteFriends: return "Invite your friends"
+        case .statistics: return "Statistics"
+        case .shareProgress: return "Share your progress"
+        }
+    }
+}
 struct SoonView: View {
     
+    let barTitle: SoonViewTitle
     var user: User?
     @State private var primaryColor = Color.white
     @Environment(\.dismiss) var dismiss
@@ -28,7 +43,6 @@ struct SoonView: View {
                     Text("It will be added in the next updates!")
                 }
             }
-//            .navigationBarTitle(Text("Invite your friends").font(.subheadline), displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -38,7 +52,7 @@ struct SoonView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Invite your friends")
+                    Text(barTitle.Title)
                         .font(.system(.title, design: .rounded))
                         .fontWeight(.bold)
                         .foregroundStyle(.white)
@@ -57,7 +71,7 @@ struct SoonView: View {
 
 struct SoonView_Previews: PreviewProvider {
     static var previews: some View {
-        SoonView(user: dev.user)
+        SoonView(barTitle: .statistics, user: dev.user)
         //SoonView()
     }
 }
