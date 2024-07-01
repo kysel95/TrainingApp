@@ -86,3 +86,99 @@ enum Instructions: Int, CaseIterable, Identifiable {
     
     var id: Int { return self.rawValue }
 }
+enum Feedbacks: Int, CaseIterable, Identifiable {
+    case rateTheApp
+    case sendFeedback
+    
+    var title: String {
+        switch self {
+        case .rateTheApp: return "Rate the app"
+        case .sendFeedback: return "Send feedback"
+        }
+    }
+    
+    var imageName: String {
+        switch self {
+        case .rateTheApp: return "star.fill"
+        case .sendFeedback: return "ellipsis.message.fill"
+        }
+    }
+    
+    var imageBackgroundColor: Color {
+        switch self {
+        case .rateTheApp: return Color((Color.basicTitle).opacity(0.8))
+        case .sendFeedback: return Color((Color.basicTitle).opacity(0.8))
+        }
+    }
+    
+    var destination: some View {
+        switch self {
+        case .rateTheApp: return SoonView(barTitle: .inviteFriends)
+        case .sendFeedback: return SoonView(barTitle: .inviteFriends)
+        }
+    }
+    
+    var id: Int { return self.rawValue }
+}
+enum Followus: Int, CaseIterable, Identifiable {
+    case instagram
+    case facebook
+    case twitter
+    
+    var title: String {
+        switch self {
+        case .instagram: return "Instagram"
+        case .facebook: return "Facebook"
+        case .twitter: return "Twitter"
+        }
+    }
+    
+    var imageName: String {
+        switch self {
+        case .instagram: return "instagram"
+        case .facebook: return "facebook-square-fill"
+        case .twitter: return "twitter-fill"
+        }
+    }
+    
+    var imageBackgroundColor: Color {
+        switch self {
+        case .instagram: return Color((Color.basicTitle).opacity(0.8))
+        case .facebook: return Color((Color.basicTitle).opacity(0.8))
+        case .twitter: return Color((Color.basicTitle).opacity(0.8))
+        }
+    }
+    
+    var destination: some View {
+        switch self {
+        case .instagram: return SoonView(barTitle: .inviteFriends)
+        case .facebook: return SoonView(barTitle: .statistics)
+        case .twitter: return SoonView(barTitle: .shareProgress)
+        }
+    }
+    
+    var id: Int { return self.rawValue }
+}
+enum Logout: Int, CaseIterable, Identifiable {
+    case logout
+    
+    var title: String {
+        switch self {
+        case .logout: return "Log out"
+        }
+    }
+    
+    var imageName: String {
+        switch self {
+        case .logout: return "rectangle.portrait.and.arrow.right"
+        }
+    }
+    
+    var imageBackgroundColor: Color {
+        switch self {
+        case .logout: return Color((Color.basicTitle).opacity(0.8))
+        }
+    }
+    
+    var id: Int { return self.rawValue }
+}
