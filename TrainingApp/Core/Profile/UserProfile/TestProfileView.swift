@@ -314,6 +314,20 @@ struct TestProfileView: View {
                 .padding(0)
                 .frame(width: 390, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .padding(.bottom, -50)
+                VStack(alignment: .center) {
+                    Text("The application was written for a scientific purpose.")
+                        .font(.body)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                    (Text("It will be gradually updated with new features in the future.") + Text(Image(systemName: "heart.fill"))
+                        .foregroundColor(.red))
+                        .frame(maxWidth: 250, alignment: .center)
+                        .foregroundColor(Color.basicTitle).opacity(0.8)
+                        .multilineTextAlignment(.center)
+                    Text("Beta Version: 1.0")
+                        .padding()
+                }
+                .padding(20)
             }
         }
         .modifier(BackgroundModifier())
